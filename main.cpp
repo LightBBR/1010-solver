@@ -173,40 +173,8 @@ void test_history() {
     clear();
 }
 
-unsigned test_bestPlace(bool output = true) {
-    Board b;
-    bool canPlace = true;
-
-    if (output) {
-        clear(); std::cout << b; pause();
-    }
-
-    while (canPlace) {
-        std::pair<Board, int> res = b.bestPlace(randomPiece());
-        if (res.second == -1) canPlace = false;
-        else {
-            b = res.first;
-            if (output) {
-                clear(); std::cout << b; pause();
-            }
-        }
-    }
-    return b.score();
-}
-
 int main() {
     srand(time(0));
-
-    //*
-    unsigned max = test_bestPlace(false);
-    for(unsigned i = 0; i < 100; ++i) {
-        unsigned tmp = test_bestPlace(false);
-        if (tmp > max) max = tmp;
-    }
-
-    std::cout << "greatest score: " << max << std::endl;
-    // */
-
     return 0;
 }
 
