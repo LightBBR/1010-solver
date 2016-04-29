@@ -5,11 +5,11 @@ Piece::Piece(unsigned height, unsigned width, bool init) : piece(height, std::ve
 }
 
 // return: height, width
-std::pair<unsigned, unsigned> Piece::dim() const {
+dim_t Piece::dim() const {
     if (piece.size())
-        return std::pair<unsigned, unsigned>(piece.size(), piece.at(0).size());
+        return dim_t(piece.size(), piece.at(0).size());
     else
-        return std::pair<unsigned, unsigned>(0, 0);
+        return dim_t(0, 0);
 }
 
 void Piece::resize(unsigned height, unsigned width, bool fill) {

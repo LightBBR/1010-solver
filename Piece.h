@@ -3,13 +3,17 @@
 
 #include <vector>
 
+class Piece;
+
+typedef std::pair<unsigned, unsigned> dim_t;
+
 class Piece {
     private:
         std::vector<std::vector<bool> > piece;
     public:
         Piece(unsigned, unsigned, bool = false);
 
-        std::pair<unsigned, unsigned> dim() const;
+        dim_t dim() const;
         void resize(unsigned, unsigned, bool = false);
         void trim();
 
