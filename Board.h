@@ -6,24 +6,30 @@
 #include <vector>
 #include "Piece.h"
 
+class Board;
+
+typedef std::pair<Piece, std::pair<unsigned, unsigned> > histEnt_t;
+typedef std::pair<Board, int> placement_t;
+
 class Board {
     private:
         unsigned _score;
         std::vector<std::vector<bool> > board;
-        std::vector<std::pair<Piece, std::pair<unsigned, unsigned> > > history;
+        std::vector<histEnt_t> history;
     public:
         Board(int = 10);
         Board(int, int);
 
         int place(const Piece&, unsigned, unsigned);
-        std::vector<std::pair<Board, int> > place(const Piece&) const;
-        std::pair<Board, int> bestPlace(const Piece& p) const;
+        std::vector<placement_t> place(const Piece&) const;
 
         bool undo(unsigned = 1);
-        std::pair<Piece, std::pair<unsigned, unsigned> > last() const;
+        histEnt_t last() const;
 
-        unsigned score() const;
         unsigned size() const;
+        unsigned score() const;
+        unsigned height() const;
+        unsigned width() const;
         void clear();
 
         unsigned operator()() const;
