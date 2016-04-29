@@ -64,6 +64,7 @@ bool Board::undo(unsigned num) {
 }
 
 histEnt_t Board::last() const {
+    if (!history.size()) return histEnt_t();
     return history.at(history.size()-1);
 }
 
