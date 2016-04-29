@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=-W -Wall -Werror -std=c++0x -g
 
 all: main.o Board.o Piece.o
-	$(CC) $(CFLAGS) main.o Board.o Piece.o -o out
+	$(CC) $(CFLAGS) main.o Board.o Piece.o -o 1010
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c main.cpp
