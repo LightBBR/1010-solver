@@ -12,6 +12,7 @@ class Piece {
         std::vector<std::vector<bool> > piece;
     public:
         Piece(unsigned, unsigned, bool = false);
+        Piece();
 
         dim_t dim() const;
         void resize(unsigned, unsigned, bool = false);

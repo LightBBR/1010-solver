@@ -4,6 +4,9 @@
 Piece::Piece(unsigned height, unsigned width, bool init) : piece(height, std::vector<bool>(width, init)) {
 }
 
+Piece::Piece() : piece() {
+}
+
 // return: height, width
 dim_t Piece::dim() const {
     if (piece.size())
