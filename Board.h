@@ -47,4 +47,9 @@ class Board {
         int update();
 };
 
+template <typename A, typename B>
+bool comPairBySecondGT(const std::pair<A, B>& left, const std::pair<A, B>& right) {
+    return left.second > right.second;
+}
+
 #endif
