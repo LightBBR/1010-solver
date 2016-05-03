@@ -94,4 +94,25 @@ unsigned Piece::size() const {
     return sz;
 }
 
+std::ostream& operator<<(std::ostream& out, const Piece& p) {
+    dim_t dim = p.dim();
+    if (!dim.first) return out;
+
+    for(unsigned i = 0; i < dim.second; ++i) out << "+---";
+    out << '+' << std::endl;
+
+    for(unsigned i = 0; i < dim.first; ++i) {
+        for(unsigned j = 0; j < dim.second; ++j) {
+            out << '|';
+            if (p.get(i, j)) out << " X ";
+            else             out << "   ";
+        }
+        out << "|" << std::endl;
+
+        for(unsigned j = 0; j < dim.second; ++j) out << "+---";
+        out << '+' << std::endl;
+    }
+    return out;
+}
+
 
