@@ -7,18 +7,6 @@
 #include "Board.h"
 
 // global pieces
-Piece _1x1(1, 1, true);
-Piece _1x2(1, 2, true);
-Piece _1x3(1, 3, true);
-Piece _1x4(1, 4, true);
-Piece _1x5(1, 5, true);
-Piece _2x1(2, 1, true);
-Piece _2x2(2, 2, true);
-Piece _3x1(3, 1, true);
-Piece _3x3(3, 3, true);
-Piece _4x1(4, 1, true);
-Piece _5x1(5, 1, true);
-
 
 void clear() {
     std::cout << "\ec";
@@ -30,6 +18,18 @@ void pause() {
 }
 
 Piece randomPiece() {
+    Piece _1x1(1, 1, true);
+    Piece _1x2(1, 2, true);
+    Piece _1x3(1, 3, true);
+    Piece _1x4(1, 4, true);
+    Piece _1x5(1, 5, true);
+    Piece _2x1(2, 1, true);
+    Piece _2x2(2, 2, true);
+    Piece _3x1(3, 1, true);
+    Piece _3x3(3, 3, true);
+    Piece _4x1(4, 1, true);
+    Piece _5x1(5, 1, true);
+
     Piece l000(_2x2); l000.clear(0, 1);
     Piece l090(_2x2); l090.clear(0, 0);
     Piece l180(_2x2); l180.clear(1, 0);
@@ -108,48 +108,6 @@ void randomize(Board& b, unsigned tries = 1000) {
         b.place(randomPiece(), rand() % 10, rand() % 10);
 }
 
-void test_3x3() {
-    Board b;
-    b.place(_3x3, 0, 0);
-    b.place(_3x3, 0, 3);
-    b.place(_3x1, 0, 6);
-    b.place(_1x1, 0, 9);
-    clear(); std::cout << b; pause();
-
-    std::vector<std::pair<Board, int> > results = b.place(_3x3);
-
-    for(unsigned i = 0; i < results.size(); ++i) {
-        clear();
-        std::cout << results.at(i).first << results.at(i).second << std::endl
-            << i;
-        if (i + 1 == results.size()) std::cout << " (last)";
-        std::cout << std::endl;
-        pause();
-    }
-
-    clear();
-}
-
-void test_1x4() {
-    Board b;
-    b.place(_3x3, 0, 0);
-    b.place(_3x3, 0, 3);
-    clear(); std::cout << b; pause();
-
-    std::vector<std::pair<Board, int> > results = b.place(_4x1);
-
-    for(unsigned i = 0; i < results.size(); ++i) {
-        clear();
-        std::cout << results.at(i).first << results.at(i).second << std::endl
-            << i;
-        if (i + 1 == results.size()) std::cout << " (last)";
-        std::cout << std::endl;
-        pause();
-    }
-
-    clear();
-}
-
 void test_randomize() {
     unsigned tries, reps;
     std::cout << "Enter tries: ";
@@ -159,22 +117,29 @@ void test_randomize() {
     for(unsigned i = 0; i < reps; ++i) {
         Board b;
         randomize(b, tries);
-        clear(); std::cout << b; pause();
+        clear();
+        std::cout << b;
+        pause();
     }
 }
 
 void test_history() {
     Board b;
     randomize(b);
-    clear(); std::cout << b; pause();
-    while (b.undo()) {
-        clear(); std::cout << b; pause();
-    }
-    clear();
+    do {
+        clear();
+        histEnt_t h = b.last();
+        std::cout << b;
+        std::cout << "About to remove piece from (" << h.second.first << ", " << h.second.second << ')' << std::endl;
+        pause();
+    } while (b.undo());
 }
 
 int main() {
     srand(time(0));
+
+    test_history();
+
     return 0;
 }
 
