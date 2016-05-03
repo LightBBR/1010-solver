@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-W -Wall -Werror -std=c++0x -g
+CFLAGS=-W -Wall -Werror -std=c++0x -g -O3
 
 all: main.o Board.o Piece.o
 	$(CC) $(CFLAGS) main.o Board.o Piece.o -o 1010
